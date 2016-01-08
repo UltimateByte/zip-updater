@@ -114,19 +114,9 @@ find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o "$filename" -
 fn_lowercase(){
 # Converting foldernames to lowercase
 if [ "${lowercase}" == "on" ]; then
-	echo "Converting uppercase zips to lowercase"
+	echo "Converting uppercase folders to lowercase"
 	sleep 2
-	for x in $(find "${extractdir}"/* -maxdepth 0 -type d);
-		do
-		# Translate CAPS to small letters
-		y=$(echo "$x" | tr '[:upper]' '[:lower:]');
-		# Check if directory exits
-		if [ ! -d "$y" ]; then
-			echo "mv $x $y"
-			mv "$x" "$y";
-		fi
-	done
-fi
+find "${extractdir}" -exec readlink -e '{}' \; | rename  'y/A-Z/a-z/'
 }
 
 fn_move(){
