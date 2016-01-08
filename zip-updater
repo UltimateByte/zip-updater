@@ -50,12 +50,13 @@ fi
 if [ -z "${ziplinks}" ]; then	
 	echo "Please, set something do download !"
 	local errorziplinks="1"
+fi
 # Check if backupzips is set correctly
 if [ ! "${backupzips}" != "on" ] && [ ! "${backupzips}" != "off" ]; then
 	echo "Please, set backupzips to on or off"
 	local errorbackupzips="1"
 fi
-if  [ "$errortargetdir" == "1"] || [ "$errorziplinks" == "1" ] || [ "$errorbackupzips" == "1" ]; then
+if  [ "$errortargetdir" == "1" ] || [ "$errorziplinks" == "1" ] || [ "$errorbackupzips" == "1" ]; then
 	echo "Exiting";	exit
 fi
 }
