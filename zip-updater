@@ -35,10 +35,10 @@ https://github.com/wiremod/advduplicator/archive/master.zip"
 ### Do Not Change ###
 #####################
 
-rootdir='$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)'
-zipsdir='${rootdir}/zipfiles'
-extractdir='${rootdir}/exctracted'
-backupdir='${rootdir}/backups'
+rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+zipsdir="${rootdir}/zipfiles"
+extractdir="${rootdir}/exctracted"
+backupdir="${rootdir}/backups"
 
 # Check if targetdir is set
 if [ -z "${targetdir}" ]; then
