@@ -115,7 +115,7 @@ fn_move(){
 # Moving extractions to targetdir
 echo "Moving Extracted zips to desired directory..."
 sleep 1
-mv "${extractdir}/* ${targetdir}"
+mv "${extractdir}/* ${targetdir}/."
 }
 
 fn_getdate(){
@@ -126,7 +126,7 @@ thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 fn_remove_zips(){
 # Remove zips when no backup are set
 	echo "Clearing zips"
-	sleep1
+	sleep 1
 	rm "${zipsdir}/*"
 }
 
