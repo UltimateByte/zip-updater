@@ -37,7 +37,7 @@ https://github.com/wiremod/advduplicator/archive/master.zip"
 
 rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 zipsdir="${rootdir}/tempzipfiles"
-extractdir="${zipsdir}/exctracted-zipfiles"
+extractdir="${rootdir}/exctracted-zipfiles"
 backupdir="${rootdir}/backup-zipfiles"
 
 # Check if targetdir is set
@@ -119,16 +119,14 @@ sleep 2
 mv -v "${extractdir}"/* "${targetdir}"/
 echo ""
 echo "Files moved to desired directory"
+echo "Removing temp folder"
+sleep 1
+rm -vR "${extractdir}"
 }
 
 fn_getdate(){
 # Get current date into a variable
 thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
-}
-
-fn_remove_zips(){
-# Remove zips when no backup are set
-	rm -vR "${zipsdir}"
 }
 
 fn_backup(){
@@ -138,14 +136,15 @@ if [ "${backupzips}" == "off" ]; then
 	echo "No zip backup, removing zips"
 	echo ""
 	sleep 1
-	fn_remove_zips
+	rm -vR "${zipsdir}"
 elif [ "${backupzips}" == "on" ]; then
 # Backup, move files to a current date folder in backupdir
 	echo "Backuping zips to ${backupdir}"
 	sleep 1
 	fn_getdate
-	mkdir "${backupdir}"/$"{thedate}"
-	mv -v "${zipsdir}"/* "${thedate}"
+	mkdir "${backupdir}"/"${thedate}"
+	mv -v "${zipsdir}"/* "${backupdir}"/"${thedate}"
+	rm -vR "${zipsdir}"
 fi
 }
 
