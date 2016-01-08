@@ -136,6 +136,9 @@ sleep 2
 mv -v "${extractdir}"/* "${targetdir}"/
 echo ""
 echo "Files moved to desired directory"
+}
+
+fn_rm_extractdir(){
 echo "Removing temp folder"
 sleep 1
 rm -vR "${extractdir}"
@@ -150,10 +153,9 @@ fn_backup(){
 # No backup, remove zip files
 if [ "${backupzips}" == "off" ]; then
 	echo ""
-	echo "No zip backup, removing zips"
+	echo "No zip backup"
 	echo ""
 	sleep 1
-	rm -vR "${zipsdir}"
 elif [ "${backupzips}" == "on" ]; then
 # Backup, move files to a current date folder in backupdir
 	fn_getdate
@@ -163,8 +165,12 @@ elif [ "${backupzips}" == "on" ]; then
 	sleep 1
 	mkdir -v "${backupdir}"/"${thedate}"
 	mv -v "${zipsdir}"/* "${backupdir}"/"${thedate}"
-	rm -vR "${zipsdir}"
 fi
+}
+
+fn_rm_zipsdir(){
+echo "Clearing temp zip folder"
+rm -vR "${zipsdir}"
 }
 
 fn_prompt_continue(){
@@ -200,5 +206,7 @@ fn_dl_zip
 fn_extract_zip
 # fn_lowercase
 fn_move
+fn_rm_extractdir
 fn_backup
+fn_rm_zipsdir
 fn_complete
