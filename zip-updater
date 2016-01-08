@@ -175,10 +175,13 @@ echo ""
 }
 
 # Running functions
+echo ""
 echo "Thanks for using this script made by UltimateByte"
 fn_error_check
+echo ""
 echo "This will start downloading your zipfiles, then overwrite older versions"
 echo "in the target directory you set."
+echo ""
 echo "Start updating zips ?"
 echo ""
 fn_prompt_continue
