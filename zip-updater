@@ -36,14 +36,11 @@ https://github.com/nrlulz/ACF/archive/master.zip"
 ### Do Not Change ###
 #####################
 
-fn_init(){
 rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 zipsdir="${rootdir}/zip-updater/zipfiles"
 extractdir="${rootdir}/zip-updater/exctracted"
 backupdir="${rootdir}/zip-updater/backups"
-}
 
-fn_check_zipsettings(){
 # Check if targetdir is set
 if [ -z "${targetdir}" ]; then
 	echo "Please, set a target directory using targetdir variable first"
@@ -57,7 +54,7 @@ if [ -z "${targetdir}" ]; then
 		fi
 	fi
 fi
-}
+
 
 fn_create_dirs(){
 echo "Creating required folders..."
@@ -167,8 +164,6 @@ echo ""
 }
 
 # Running functions
-fn_init
-fn_check_zipsettings
 echo "Start updating zips ?"
 fn_prompt_continue
 fn_create_dirs
