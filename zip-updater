@@ -135,7 +135,7 @@ if [ "${backupzips}" == "0" ]; then
 	echo "No zip backup, removing zips"
 	sleep 1
 	fn_remove_zips
-elif [ "${backupzips}" -ge "0" ]
+elif [ "${backupzips}" -ge "0" ]; then
 # Backup, move files to a current date folder in backupdir
 	echo "Backuping zips"
 	sleep 1
