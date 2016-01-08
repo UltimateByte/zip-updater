@@ -124,8 +124,6 @@ thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 
 fn_remove_zips(){
 # Remove zips when no backup are set
-	echo "Clearing zips as backup is set to 0"
-	sleep 1
 	rm -v "${zipsdir}"/*
 }
 
