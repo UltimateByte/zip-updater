@@ -80,7 +80,7 @@ fn_dl_zip(){
 while IFS= read -r line
 do 
 	echo "Downloading ${line}"
-	wget -q "${line}" -P "${targetdir}"
+	wget -q "${line}" -P "${zipfiles}"
 done <<< "${ziplinks}"
 }
 
