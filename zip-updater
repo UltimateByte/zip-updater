@@ -51,20 +51,24 @@ if [ -z "${targetdir}" ]; then
 fi
 # Check if zip links are provided
 if [ -z "${ziplinks}" ]; then	
+	echo ""
 	echo "Please, set something do download !"
 	local errorziplinks="1"
 fi
 # Check if backupzips is set correctly
 if [ "${backupzips}" != "on" ] && [ "${backupzips}" != "off" ]; then
+	echo ""
 	echo "Please, set backupzips to on or off"
 	local errorbackupzips="1"
 fi
 # Check if promptmode is set correctly 
 if [ "${promptmode}" != "on" ] && [ "${promptmode}" != "off" ]; then
+	echo ""
 	echo "Please, set promptmode to on or off"
 	local errorpromptmode="1"
 fi
 if  [ "$errortargetdir" == "1" ] || [ "$errorziplinks" == "1" ] || [ "$errorbackupzips" == "1" ] || [ "$errorpromptmode" == "1" ]; then
+	echo ""
 	echo "Exiting";	exit
 fi
 }
