@@ -126,7 +126,7 @@ fn_remove_zips(){
 # Remove zips when no backup are set
 	echo "Clearing zips"
 	sleep 1
-	rm "${zipsdir}/*"
+	rm "${zipsdir}"/*
 }
 
 fn_backup(){
