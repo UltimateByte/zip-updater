@@ -117,6 +117,7 @@ if [ "${lowercase}" == "on" ]; then
 	echo "Converting uppercase folders to lowercase"
 	sleep 2
 find "${extractdir}" -exec readlink -e '{}' \; | rename  'y/A-Z/a-z/'
+fi
 }
 
 fn_move(){
