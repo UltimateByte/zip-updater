@@ -90,7 +90,6 @@ echo ""
 echo "Extracting zipfiles..."
 echo ""
 sleep 1
-cd "${rootdir}"
 find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o "$filename" -d "${extractdir}"; done;
 }
 
