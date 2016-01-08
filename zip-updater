@@ -37,9 +37,9 @@ https://github.com/nrlulz/ACF/archive/master.zip"
 #####################
 
 rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-zipsdir="${rootdir}/zip-updater/zipfiles"
-extractdir="${rootdir}/zip-updater/exctracted"
-backupdir="${rootdir}/zip-updater/backups"
+zipsdir="${rootdir}/zipfiles"
+extractdir="${rootdir}/exctracted"
+backupdir="${rootdir}/backups"
 
 # Check if targetdir is set
 if [ -z "${targetdir}" ]; then
