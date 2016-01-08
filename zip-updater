@@ -89,7 +89,7 @@ fn_extract_zip(){
 echo ""
 echo "Extracting zipfiles"
 cd "${rootdir}"
-find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o -d "`${extractdir} "$filename"`" "$filename"; done;
+find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o "$filename" -d "${extractdir}"; done;
 }
 
 fn_lowercase(){
