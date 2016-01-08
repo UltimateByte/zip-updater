@@ -10,8 +10,8 @@ version="080115"
 ### Configuration ###
 #####################
 
-# Folder in which you want your exctracted zip folders
-# Please use /home/username/path/to/folder
+# Target directory in which you want your exctracted zip folders
+# Please use /home/username/path/to/directory
 targetdir="targetdir"
 
 # How many backups of previous zips do you want to keep ?
@@ -46,7 +46,7 @@ backupdir="${rootdir}/zip-updater/backups"
 fn_check_zipsettings(){
 # Check if downloaddir is set
 if [ -z "${targetdir}" ]; then
-	echo "Please, set a download directory using targetdir variable first"
+	echo "Please, set a target directory using targetdir variable first"
 # Check if zip links are provided
 	if [ -z "${ziplinks}" ]; then	
 		echo "Please, set something do download !"
@@ -100,7 +100,20 @@ find ${zipsdir} -name "*.zip" | while read filename; do unzip -o -d "`${extractd
 }
 
 fn_lowercase(){
-
+if [ "${lowercase}" == "on" ]; then
+	echo "Converting uppercase zips to lowercase"
+	sleep 2
+	for x in `find ${extractdir}/* -maxdepth 0 -type d`;
+		do
+		# Translate CAPS to small letters
+		y=$(echo $x | tr ‘[A-Z]’ ‘[a-z]’);
+		# Check if directory exits
+		if [ ! -d $y ]; then
+			echo “mv $x $y”
+			mv $x $y;
+		fi
+	done
+fi
 }
 
 fn_move(){
@@ -147,4 +160,6 @@ fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
 fn_extract_zip
+fn_lowercase
+fn_move
 fn_backup
