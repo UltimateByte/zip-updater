@@ -1,14 +1,10 @@
 # zip-updater
 Easily update any addon or content from a zip file !
 
-- First, :  Download the script
-wget https://raw.githubusercontent.com/UltimateByte/zip-updater/master/zip-updater
-- Then : Edit the script fo fit your needs
-nano zip-updater
-- Then :  Make it executable
-chmod +x zip-updater
-- Finally : Run and enjoy !
-./zip-updater
+- First, download the script : wget https://raw.githubusercontent.com/UltimateByte/zip-updater/master/zip-updater
+- Then, edit the script fo fit your needs : nano zip-updater
+- Then, make it executable : chmod +x zip-updater
+- Finally : Run and enjoy ! ./zip-updater
 
 Using a cronjob ? Disable prompt by setting promptmode="off"
 Please, feedback
