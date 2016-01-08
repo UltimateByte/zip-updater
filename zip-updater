@@ -29,8 +29,7 @@ lowercase="on"
 # https://github.com/wiremod/advduplicator/archive/master.zip
 # https://github.com/nrlulz/ACF/archive/master.zip"
 
-ziplinks="https://github.com/wiremod/advdupe2/archive/master.zip
-https://github.com/wiremod/advduplicator/archive/master.zip"
+ziplinks=""
 
 
 #####################
@@ -114,18 +113,9 @@ find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o "$filename" -
 fn_lowercase(){
 # Converting foldernames to lowercase
 if [ "${lowercase}" == "on" ]; then
-	echo "Converting uppercase zips to lowercase"
+	echo "Converting uppercase folders to lowercase"
 	sleep 2
-	for x in `find ${extractdir}/* -maxdepth 0 -type d`;
-		do
-		# Translate CAPS to small letters
-		y=$(echo $x | tr ‘[A-Z]’ ‘[a-z]’);
-		# Check if directory exits
-		if [ ! -d $y ]; then
-			echo “mv $x $y”
-			mv $x $y;
-		fi
-	done
+find "${extractdir}" -exec readlink -e '{}' \; | rename  'y/A-Z/a-z/'
 fi
 }
 
@@ -204,7 +194,7 @@ fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
 fn_extract_zip
-# fn_lowercase
+fn_lowercase
 fn_move
 fn_rm_extractdir
 fn_backup
