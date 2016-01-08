@@ -139,7 +139,7 @@ if [ "${backupzips}" == "off" ]; then
 	echo ""
 	sleep 1
 	fn_remove_zips
-elif [ "${backupzips}" -ge "on" ]; then
+elif [ "${backupzips}" == "on" ]; then
 # Backup, move files to a current date folder in backupdir
 	echo "Backuping zips to ${backupdir}"
 	sleep 1
