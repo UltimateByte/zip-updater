@@ -3,4 +3,147 @@
 # Allows you to easilly download, extract, and update zip content
 # Author: UltimateByte
 # Website: http://www.lrob.fr
+version="080115"
 
+#####################
+###   Variables   ###
+### Configuration ###
+#####################
+
+# Folder in which you want your exctracted zip folders
+# Please use /home/username/path/to/folder
+targetdir="targetdir"
+
+# How many backups of previous zips do you want to keep ?
+backupzips="0"
+
+# Convert folders to lowercase (default on to correct windows devs' ignorance)
+lowercase="on"
+
+# Paste links of zip files you want to download line by line
+# Example :
+# ziplinks="https://github.com/wiremod/advdupe2/archive/master.zip
+# https://github.com/wiremod/advduplicator/archive/master.zip
+# https://github.com/nrlulz/ACF/archive/master.zip"
+
+ziplinks="https://github.com/wiremod/advdupe2/archive/master.zip
+https://github.com/wiremod/advduplicator/archive/master.zip
+https://github.com/nrlulz/ACF/archive/master.zip"
+
+
+#####################
+###    Program    ###
+### Do Not Change ###
+#####################
+
+fn_init(){
+rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+zipsdir="${rootdir}/zip-updater/zipfiles"
+extractdir="${rootdir}/zip-updater/exctracted"
+backupdir="${rootdir}/zip-updater/backups"
+}
+
+fn_check_zipsettings(){
+# Check if downloaddir is set
+if [ -z "${targetdir}" ]; then
+	echo "Please, set a download directory using targetdir variable first"
+# Check if zip links are provided
+	if [ -z "${ziplinks}" ]; then	
+		echo "Please, set something do download !"
+# Check if backupzips is set
+		if [ -z "${backupzips}" ]; then
+			echo "Plase, set a backupzips value, even 0 counts !"
+			exit
+		fi
+	fi
+fi
+}
+
+
+fn_create_dirs(){
+echo "Creating required folders..."
+sleep 2
+# Check if dirs exist, create if if not
+if [ ! -f $"{targetdir}" ]; then
+	echo "Creating ${targetdir}"
+	mkdir "${targetdir}"
+fi
+
+if [ ! -f $"{zipsdir}" ]; then
+	echo "Creating ${zipsdir}"
+	mkdir "${zipsdir}"
+fi
+
+if [ ! -f $"{extractdir}" ]; then
+	echo "Creating ${extractdir}"
+	mkdir "${extractdir}"
+fi
+
+if [ ! -f $"{backupdir}" ]; then
+	echo "Creating ${backupdir}"
+	mkdir "${backupdir}"
+fi
+}
+
+
+fn_dl_zip(){
+while IFS= read -r line
+do 
+	echo "Downloading ${line}"
+	wget -q "${line}" -P "${downloaddir}"
+done <<< "${ziplinks}"
+}
+
+fn_extract(){
+echo ""
+echo "Extracting zipfiles"
+cd ${rootdir}
+find ${zipsdir} -name "*.zip" | while read filename; do unzip -o -d "`${extractdir} "$filename"`" "$filename"; done;
+}
+
+fn_lowercase(){
+
+}
+
+fn_move(){
+mv ${extractdir}/* ${targetdir}
+}
+
+fn_getdate(){
+thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
+}
+
+fn_remove_zips(){
+
+}
+
+fn_backup(){
+if [ "$backupzips" == "0"]; then
+	echo "Clearing zips"
+	sleep1
+	rm "${zipsdir}/*"
+elif
+	echo "Backuping zips backup"
+	sleep 1
+	fn_getdate
+	mkdir "${backupdir}/${thedate}"
+	mv "${zipsdir}/* ${thedate}"
+}
+
+
+fn_prompt_continue(){
+while true; do
+	read -p "Continue? [y/N]" yn
+	case $yn in
+	[Yy]* ) break;;
+	[Nn]* ) echo Exiting; return;;
+	* ) echo "Please answer yes or no.";;
+esac
+done
+}
+
+fn_init
+fn_check_zipsettings
+fn_prompt_continue
+fn_create_dirs
+fn_dl_zip
