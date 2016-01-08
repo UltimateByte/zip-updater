@@ -59,7 +59,6 @@ if [ -z "${targetdir}" ]; then
 fi
 }
 
-
 fn_create_dirs(){
 echo "Creating required folders..."
 sleep 2
@@ -85,7 +84,6 @@ if [ ! -f $"{backupdir}" ]; then
 fi
 }
 
-
 fn_dl_zip(){
 while IFS= read -r line
 do 
@@ -94,7 +92,7 @@ do
 done <<< "${ziplinks}"
 }
 
-fn_extract(){
+fn_extract_zip(){
 echo ""
 echo "Extracting zipfiles"
 cd ${rootdir}
@@ -106,6 +104,8 @@ fn_lowercase(){
 }
 
 fn_move(){
+echo "Moving Extracted zips to desired directory..."
+sleep 1
 mv ${extractdir}/* ${targetdir}
 }
 
@@ -114,22 +114,21 @@ thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 }
 
 fn_remove_zips(){
-
+	echo "Clearing zips"
+	sleep1
+	rm "${zipsdir}/*"
 }
 
 fn_backup(){
 if [ "$backupzips" == "0"]; then
-	echo "Clearing zips"
-	sleep1
-	rm "${zipsdir}/*"
+fn_remove_zips
 elif
-	echo "Backuping zips backup"
+	echo "Backuping zips"
 	sleep 1
 	fn_getdate
 	mkdir "${backupdir}/${thedate}"
 	mv "${zipsdir}/* ${thedate}"
 }
-
 
 fn_prompt_continue(){
 while true; do
@@ -147,3 +146,5 @@ fn_check_zipsettings
 fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
+fn_extract_zip
+fn_backup
