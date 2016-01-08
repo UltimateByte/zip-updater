@@ -17,7 +17,7 @@ targetdir="targetdir"
 # How many backups of previous zips do you want to keep ?
 backupzips="0"
 
-# Convert folders to lowercase (default on to correct windows devs' ignorance)
+# Experimental - Convert folders to lowercase (default on to correct windows devs' ignorance)
 lowercase="on"
 
 # Paste links of zip files you want to download line by line
@@ -80,7 +80,7 @@ fn_dl_zip(){
 while IFS= read -r line
 do 
 	echo "Downloading ${line}"
-	wget -q "${line}" -P "${zipfiles}"
+	wget -q "${line}" -P "${zipsdir}"
 done <<< "${ziplinks}"
 }
 
