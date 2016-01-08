@@ -29,8 +29,8 @@ lowercase="on"
 # https://github.com/wiremod/advduplicator/archive/master.zip
 # https://github.com/nrlulz/ACF/archive/master.zip"
 
-ziplinks="https://github.com/wiremod/advdupe2/archive/master.zip
-https://github.com/wiremod/advduplicator/archive/master.zip"
+ziplinks="https://github.com/nrlulz/ACF/archive/master.zip
+https://github.com/wiremod/advdupe2/archive/master.zip"
 
 
 #####################
@@ -116,14 +116,14 @@ fn_lowercase(){
 if [ "${lowercase}" == "on" ]; then
 	echo "Converting uppercase zips to lowercase"
 	sleep 2
-	for x in `find ${extractdir}/* -maxdepth 0 -type d`;
+	for x in $(find "${extractdir}"/* -maxdepth 0 -type d);
 		do
 		# Translate CAPS to small letters
-		y=$(echo $x | tr ‘[A-Z]’ ‘[a-z]’);
+		y=$(echo "$x" | tr '[:upper]' '[:lower:]');
 		# Check if directory exits
-		if [ ! -d $y ]; then
-			echo “mv $x $y”
-			mv $x $y;
+		if [ ! -d "$y" ]; then
+			echo "mv $x $y"
+			mv "$x" "$y";
 		fi
 	done
 fi
@@ -204,7 +204,7 @@ fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
 fn_extract_zip
-# fn_lowercase
+fn_lowercase
 fn_move
 fn_rm_extractdir
 fn_backup
