@@ -44,7 +44,7 @@ backupdir="${rootdir}/zip-updater/backups"
 }
 
 fn_check_zipsettings(){
-# Check if downloaddir is set
+# Check if targetdir is set
 if [ -z "${targetdir}" ]; then
 	echo "Please, set a target directory using targetdir variable first"
 # Check if zip links are provided
@@ -88,7 +88,7 @@ fn_dl_zip(){
 while IFS= read -r line
 do 
 	echo "Downloading ${line}"
-	wget -q "${line}" -P "${downloaddir}"
+	wget -q "${line}" -P "${targetdir}"
 done <<< "${ziplinks}"
 }
 
@@ -96,8 +96,8 @@ fn_extract_zip(){
 # Recursively extract zip files 
 echo ""
 echo "Extracting zipfiles"
-cd ${rootdir}
-find ${zipsdir} -name "*.zip" | while read filename; do unzip -o -d "`${extractdir} "$filename"`" "$filename"; done;
+cd "${rootdir}"
+find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o -d "`${extractdir} "$filename"`" "$filename"; done;
 }
 
 fn_lowercase(){
@@ -122,7 +122,7 @@ fn_move(){
 # Moving extractions to targetdir
 echo "Moving Extracted zips to desired directory..."
 sleep 1
-mv ${extractdir}/* ${targetdir}
+mv "${extractdir}/* ${targetdir}"
 }
 
 fn_getdate(){
@@ -177,7 +177,7 @@ fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
 fn_extract_zip
-fn_lowercase
+# fn_lowercase
 fn_move
 fn_backup
 fn_complete
