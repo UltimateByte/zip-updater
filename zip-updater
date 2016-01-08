@@ -36,7 +36,7 @@ https://github.com/wiremod/advduplicator/archive/master.zip"
 #####################
 
 rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-zipsdir="${rootdir}/zipfiles"
+zipsdir="${rootdir}/tempzipfiles"
 extractdir="${rootdir}/exctracted"
 backupdir="${rootdir}/backups"
 
@@ -87,7 +87,9 @@ done <<< "${ziplinks}"
 fn_extract_zip(){
 # Recursively extract zip files 
 echo ""
-echo "Extracting zipfiles"
+echo "Extracting zipfiles..."
+echo ""
+sleep 1
 cd "${rootdir}"
 find "${zipsdir}" -name "*.zip" | while read filename; do unzip -o "$filename" -d "${extractdir}"; done;
 }
@@ -115,6 +117,8 @@ fn_move(){
 echo "Moving Extracted zips to desired directory..."
 sleep 2
 mv -v "${extractdir}"/* "${targetdir}"/
+echo ""
+echo "Files moved to desired directory"
 }
 
 fn_getdate(){
@@ -124,13 +128,15 @@ thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 
 fn_remove_zips(){
 # Remove zips when no backup are set
-	rm -v "${zipsdir}"/*
+	rm -vR "${zipsdir}"
 }
 
 fn_backup(){
 # No backup, remove zip files
 if [ "${backupzips}" == "0" ]; then
+	echo ""
 	echo "No zip backup, removing zips"
+	echo ""
 	sleep 1
 	fn_remove_zips
 elif [ "${backupzips}" -ge "0" ]; then
