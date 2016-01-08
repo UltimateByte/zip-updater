@@ -193,11 +193,7 @@ echo ""
 echo "Thanks for using this script made by UltimateByte"
 fn_error_check
 echo ""
-echo "This will start downloading your zipfiles, then overwrite older versions"
-echo "in the target directory you set."
-echo ""
-echo "Start updating zips ?"
-echo ""
+echo "Start downloading or updating zips ?"
 fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
