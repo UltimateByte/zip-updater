@@ -14,10 +14,10 @@ version="080115"
 # Please use /home/username/path/to/directory
 targetdir="targetdir"
 
-# How many backups of previous zips do you want to keep ?
-backupzips="0"
+# Do you want to keep every instance of zipfiles you download for reverting to a previous version ?
+backupzips="on"
 
-# Experimental - Convert folders to lowercase (default on to correct windows devs' ignorance)
+# To come - Convert folders to lowercase (default on to correct windows devs' ignorance)
 lowercase="on"
 
 # Paste links of zip files you want to download line by line
@@ -37,8 +37,8 @@ https://github.com/wiremod/advduplicator/archive/master.zip"
 
 rootdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 zipsdir="${rootdir}/tempzipfiles"
-extractdir="${rootdir}/exctracted"
-backupdir="${rootdir}/backups"
+extractdir="${zipsdir}/exctracted-zipfiles"
+backupdir="${rootdir}/backup-zipfiles"
 
 # Check if targetdir is set
 if [ -z "${targetdir}" ]; then
@@ -47,8 +47,8 @@ if [ -z "${targetdir}" ]; then
 	if [ -z "${ziplinks}" ]; then	
 		echo "Please, set something do download !"
 # Check if backupzips is set
-		if [ -z "${backupzips}" ]; then
-			echo "Plase, set a backupzips value, even 0 counts !"
+		if [ ! "${backupzips}" == "on" || ! "${backupzips}" == "off"]; then
+			echo "Please, set backupzips to on or off"
 			exit
 		fi
 	fi
@@ -133,15 +133,15 @@ fn_remove_zips(){
 
 fn_backup(){
 # No backup, remove zip files
-if [ "${backupzips}" == "0" ]; then
+if [ "${backupzips}" == "off" ]; then
 	echo ""
 	echo "No zip backup, removing zips"
 	echo ""
 	sleep 1
 	fn_remove_zips
-elif [ "${backupzips}" -ge "0" ]; then
+elif [ "${backupzips}" -ge "on" ]; then
 # Backup, move files to a current date folder in backupdir
-	echo "Backuping zips"
+	echo "Backuping zips to ${backupdir}"
 	sleep 1
 	fn_getdate
 	mkdir "${backupdir}"/$"{thedate}"
@@ -169,7 +169,11 @@ echo ""
 }
 
 # Running functions
+echo "Thanks for using this script made by UltimateByte"
+echo "This will start downloading your zipfiles, then overwrite older versions"
+echo "in the target directory you set."
 echo "Start updating zips ?"
+echo ""
 fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
