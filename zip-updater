@@ -57,21 +57,21 @@ fi
 
 fn_create_dirs(){
 echo "Creating required folders..."
-sleep 2
+sleep 1
 # Check if dirs exist, create if if not
-if [ ! -d $"{targetdir}" ]; then
+if [ ! -d "${targetdir}" ]; then
 	mkdir -v "${targetdir}"
 fi
 
-if [ ! -d $"{zipsdir}" ]; then
+if [ ! -d "${zipsdir}" ]; then
 	mkdir -v "${zipsdir}"
 fi
 
-if [ ! -d $"{extractdir}" ]; then
+if [ ! -d "${extractdir}" ]; then
 	mkdir -v "${extractdir}"
 fi
 
-if [ ! -d $"{backupdir}" ]; then
+if [ ! -d "${backupdir}" ]; then
 	mkdir -v "${backupdir}"
 fi
 }
