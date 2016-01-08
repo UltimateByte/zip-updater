@@ -52,7 +52,7 @@ if [ -z "${ziplinks}" ]; then
 	local errorziplinks="1"
 fi
 # Check if backupzips is set correctly
-if [ ! "${backupzips}" != "on" ] && [ ! "${backupzips}" != "off" ]; then
+if [ "${backupzips}" != "on" ] && [ "${backupzips}" != "off" ]; then
 	echo "Please, set backupzips to on or off"
 	local errorbackupzips="1"
 fi
