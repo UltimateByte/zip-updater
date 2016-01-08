@@ -9,7 +9,7 @@ Easily update any addon or content from a zip file !
 Using a cronjob ? Disable prompt by setting promptmode="off"
 Please, feedback
 
-Tested OKfor Garry'd Mod addons with github zip links.
+Tested OK for Garry'd Mod addons with github zip links.
 Should work for anything else similar to this :
 - All your zip files contain a root folder containing all the files. 
 - Your zipfiles must have different names to be all managed correctly
