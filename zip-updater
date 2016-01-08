@@ -139,7 +139,7 @@ fn_remove_zips(){
 
 fn_backup(){
 # No backup, remove zip files
-if [ "$backupzips" == "0"]; then
+if [ "${backupzips}" == "0" ]; then
 fn_remove_zips
 elif
 # Backup, move files to a current date folder in backupdir
