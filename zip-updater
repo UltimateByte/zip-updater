@@ -17,6 +17,9 @@ targetdir="targetdir"
 # Do you want to keep every instance of zipfiles you download for reverting to a previous version ?
 backupzips="on"
 
+# Prompt for continue ? (Turn off for cronjob use)
+promptmode="on"
+
 # To come - Convert folders to lowercase (default on to correct windows devs' ignorance)
 lowercase="on"
 
@@ -56,7 +59,12 @@ if [ "${backupzips}" != "on" ] && [ "${backupzips}" != "off" ]; then
 	echo "Please, set backupzips to on or off"
 	local errorbackupzips="1"
 fi
-if  [ "$errortargetdir" == "1" ] || [ "$errorziplinks" == "1" ] || [ "$errorbackupzips" == "1" ]; then
+# Check if promptmode is set correctly 
+if [ "${promptmode}" != "on" ] && [ "${promptmode}" != "off" ]; then
+	echo "Please, set promptmode to on or off"
+	local errorpromptmode="1"
+fi
+if  [ "$errortargetdir" == "1" ] || [ "$errorziplinks" == "1" ] || [ "$errorbackupzips" == "1" ] || [ "$errorpromptmode" == "1" ]; then
 	echo "Exiting";	exit
 fi
 }
@@ -156,14 +164,16 @@ fi
 }
 
 fn_prompt_continue(){
-while true; do
-	read -p "Continue? [y/N]" yn
-	case $yn in
-	[Yy]* ) break;;
-	[Nn]* ) echo Exiting; exit;;
-	* ) echo "Please answer yes or no.";;
-esac
-done
+if [ "${promptmode}" == "on" ]; then
+	while true; do
+		read -p "Continue ? [y/N]" yn
+		case $yn in
+		[Yy]* ) break;;
+		[Nn]* ) echo Exiting; exit;;
+		* ) echo "Please answer yes or no.";;
+	esac
+	done
+fi
 }
 
 fn_complete(){
