@@ -148,6 +148,7 @@ elif
 	fn_getdate
 	mkdir "${backupdir}/${thedate}"
 	mv "${zipsdir}/* ${thedate}"
+fi
 }
 
 fn_prompt_continue(){
