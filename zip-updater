@@ -152,7 +152,7 @@ while true; do
 	read -p "Continue? [y/N]" yn
 	case $yn in
 	[Yy]* ) break;;
-	[Nn]* ) echo Exiting; return;;
+	[Nn]* ) echo Exiting; exit;;
 	* ) echo "Please answer yes or no.";;
 esac
 done
@@ -169,6 +169,7 @@ echo ""
 # Running functions
 fn_init
 fn_check_zipsettings
+echo "Start updating zips ?"
 fn_prompt_continue
 fn_create_dirs
 fn_dl_zip
