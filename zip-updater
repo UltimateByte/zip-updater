@@ -93,6 +93,7 @@ done <<< "${ziplinks}"
 }
 
 fn_extract_zip(){
+# Recursively extract zip files 
 echo ""
 echo "Extracting zipfiles"
 cd ${rootdir}
@@ -100,6 +101,7 @@ find ${zipsdir} -name "*.zip" | while read filename; do unzip -o -d "`${extractd
 }
 
 fn_lowercase(){
+# Converting foldernames to lowercase
 if [ "${lowercase}" == "on" ]; then
 	echo "Converting uppercase zips to lowercase"
 	sleep 2
@@ -117,25 +119,30 @@ fi
 }
 
 fn_move(){
+# Moving extractions to targetdir
 echo "Moving Extracted zips to desired directory..."
 sleep 1
 mv ${extractdir}/* ${targetdir}
 }
 
 fn_getdate(){
+# Get current date into a variable
 thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 }
 
 fn_remove_zips(){
+# Remove zips when no backup are set
 	echo "Clearing zips"
 	sleep1
 	rm "${zipsdir}/*"
 }
 
 fn_backup(){
+# No backup, remove zip files
 if [ "$backupzips" == "0"]; then
 fn_remove_zips
 elif
+# Backup, move files to a current date folder in backupdir
 	echo "Backuping zips"
 	sleep 1
 	fn_getdate
@@ -154,6 +161,15 @@ esac
 done
 }
 
+fn_complete(){
+echo ""
+echo "Operations complete"
+echo "Hope you enjoy this script ;)"
+echo "Cheers !"
+echo ""
+}
+
+# Running functions
 fn_init
 fn_check_zipsettings
 fn_prompt_continue
@@ -163,3 +179,4 @@ fn_extract_zip
 fn_lowercase
 fn_move
 fn_backup
+fn_complete
