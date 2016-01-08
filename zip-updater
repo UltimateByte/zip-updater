@@ -113,8 +113,8 @@ fi
 fn_move(){
 # Moving extractions to targetdir
 echo "Moving Extracted zips to desired directory..."
-sleep 1
-mv -iv "${extractdir}"/* "${targetdir}"/
+sleep 2
+mv -v "${extractdir}"/* "${targetdir}"/
 }
 
 fn_getdate(){
@@ -124,22 +124,24 @@ thedate=$(date +"%y-%m-%d-%Hh%Mm%Ss")
 
 fn_remove_zips(){
 # Remove zips when no backup are set
-	echo "Clearing zips"
+	echo "Clearing zips as backup is set to 0"
 	sleep 1
-	rm -iv "${zipsdir}"/*
+	rm -v "${zipsdir}"/*
 }
 
 fn_backup(){
 # No backup, remove zip files
 if [ "${backupzips}" == "0" ]; then
+	echo "No zip backup, removing zips"
+	sleep 1
 	fn_remove_zips
-else
+elif [ "${backupzips}" -ge "0" ]
 # Backup, move files to a current date folder in backupdir
 	echo "Backuping zips"
 	sleep 1
 	fn_getdate
-	mkdir "${backupdir}/${thedate}"
-	mv "${zipsdir}/* ${thedate}"
+	mkdir "${backupdir}"/$"{thedate}"
+	mv -v "${zipsdir}"/* "${thedate}"
 fi
 }
 
