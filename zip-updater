@@ -40,20 +40,25 @@ zipsdir="${rootdir}/tempzipfiles"
 extractdir="${rootdir}/exctracted-zipfiles"
 backupdir="${rootdir}/backup-zipfiles"
 
+fn_error_check(){
 # Check if targetdir is set
 if [ -z "${targetdir}" ]; then
 	echo "Please, set a target directory using targetdir variable first"
-# Check if zip links are provided
-	if [ -z "${ziplinks}" ]; then	
-		echo "Please, set something do download !"
-# Check if backupzips is set
-		if [ ! "${backupzips}" == "on" || ! "${backupzips}" == "off"]; then
-			echo "Please, set backupzips to on or off"
-			exit
-		fi
-	fi
+	local errortargetdir="1"
 fi
-
+# Check if zip links are provided
+if [ -z "${ziplinks}" ]; then	
+	echo "Please, set something do download !"
+	local errorziplinks="1"
+# Check if backupzips is set correctly
+if [ ! "${backupzips}" != "on" ] && [ ! "${backupzips}" != "off" ]; then
+	echo "Please, set backupzips to on or off"
+	local errorbackupzips="1"
+fi
+if  [ $errortargetdir == "1"] || [ $errorziplinks == "1" ] || [ $errorbackupzips == "1" ]; then
+	echo "Exiting";	exit
+fi
+}
 
 fn_create_dirs(){
 echo "Creating required folders..."
@@ -170,6 +175,7 @@ echo ""
 
 # Running functions
 echo "Thanks for using this script made by UltimateByte"
+fn_error_check
 echo "This will start downloading your zipfiles, then overwrite older versions"
 echo "in the target directory you set."
 echo "Start updating zips ?"
