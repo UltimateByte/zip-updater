@@ -139,10 +139,12 @@ if [ "${backupzips}" == "off" ]; then
 	rm -vR "${zipsdir}"
 elif [ "${backupzips}" == "on" ]; then
 # Backup, move files to a current date folder in backupdir
-	echo "Backuping zips to ${backupdir}"
-	sleep 1
 	fn_getdate
-	mkdir "${backupdir}"/"${thedate}"
+	echo ""
+	echo "Backuping zips to ${backupdir}/${thedate}"
+	echo ""
+	sleep 1
+	mkdir -v "${backupdir}"/"${thedate}"
 	mv -v "${zipsdir}"/* "${backupdir}"/"${thedate}"
 	rm -vR "${zipsdir}"
 fi
