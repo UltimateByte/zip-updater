@@ -123,7 +123,7 @@ fn_move(){
 # Moving extractions to targetdir
 echo "Moving Extracted zips to desired directory..."
 sleep 2
-mv -v "${extractdir}"/* "${targetdir}"/
+mv -vf "${extractdir}"/* "${targetdir}"/
 echo ""
 echo "Files moved to desired directory"
 }
