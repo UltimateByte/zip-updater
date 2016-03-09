@@ -6,7 +6,8 @@ Basically, this script will download your bunch of zips, extract them into a tem
 
 ### Requirements ###
 - You need that package : unzip 
-- Your zipfiles must have different names to be all managed correctly
+- Your zipfiles must have different names to be all managed correctly (if downloaded from github, they will take the name of the repository, don't worry).
+- You must able to use your eyes and brain to read the comments into the configuration part of the script.
 
 ### How to use ###
 - You'd better make a new folder for it : mkdir zip-updater && cd zip-updater
