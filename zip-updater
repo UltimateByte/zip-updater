@@ -21,7 +21,7 @@ backupzips="on"
 promptmode="on"
 
 # To come - Convert folders to lowercase (default on to correct windows devs' ignorance)
-lowercase="on"
+lowercase="off"
 
 # Paste links of zip files you want to download line by line
 # Example :
