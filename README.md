@@ -6,8 +6,6 @@ Basically, this script will download your bunch of zips, extract them into a tem
 
 ### Requirements ###
 - You need that package : unzip 
-Should work for anything else similar to this :
-- 
 - Your zipfiles must have different names to be all managed correctly
 
 ### How to use ###
@@ -18,6 +16,7 @@ Should work for anything else similar to this :
 - Run and enjoy : ./zip-updater
 
 #### Important notes ####
-All all your zips content must have the same folder structure, otherwise, copy zip-updater to zip-updater2, and edit the destination directory accordingly.
+All will be simply extracted to the destination folder, so your zip content must have a coherent folder structure, otherwise, make another copy of zip-updater and edit it accordingly.
 
-Please, feedback
+Please, feedback.
+If it helped you, please consider making a donation for our community : http://www.mesnie.org/donation/
