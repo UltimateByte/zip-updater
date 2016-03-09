@@ -22,8 +22,10 @@ Everything will be simply extracted to the destination folder, so your zip conte
 ##### Known issues #####
 If whatever you're updating removed some files, this script is unable to know that, so they will remain in your destination folder. 
 
-Hope you'll enjoy that script !
+##### Support #####
 
-If it helped you, please consider making a donation for our community : http://www.mesnie.org/donation/
+Feel free to open an issue if needed : https://github.com/UltimateByte/zip-updater/issues
+
+If this script helped you, please consider making a donation for our community : http://www.mesnie.org/donation/
 
 Otherwise, a simple feedback (positive or negative) is always welcome. 
