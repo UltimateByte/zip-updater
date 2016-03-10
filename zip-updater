@@ -119,13 +119,13 @@ find "${extractdir}" -exec readlink -e '{}' \; | rename  'y/A-Z/a-z/'
 fi
 }
 
-fn_move(){
-# Moving extractions to targetdir
-echo "Moving Extracted zips to desired directory..."
+fn_copy(){
+# Copying extractions to targetdir
+echo "Copying Extracted zips to desired directory..."
 sleep 2
-mv -vf "${extractdir}"/* "${targetdir}"/
+cp -Rfv "${extractdir}"/* "${targetdir}"/
 echo ""
-echo "Files moved to desired directory"
+echo "Files copied to desired directory"
 }
 
 fn_rm_extractdir(){
@@ -195,7 +195,7 @@ fn_create_dirs
 fn_dl_zip
 fn_extract_zip
 fn_lowercase
-fn_move
+fn_copy
 fn_rm_extractdir
 fn_backup
 fn_rm_zipsdir
